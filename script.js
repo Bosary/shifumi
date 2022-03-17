@@ -6,7 +6,7 @@ const playerHand = ['paper', 'scissors', 'rock'];
 const computerHand = ['rock', 'paper', 'scissors'];
 
 
-function playerSelection() {
+function playerPlay() {
     // Ask user input
     const selection = prompt("Make your choice ! (write 'rock', 'paper' or 'scissors'): ").toLowerCase();
     
@@ -38,7 +38,7 @@ function compareHands(playerChoice, computerChoice) {
     } else if (playerHand.indexOf(playerChoice) == computerHand.indexOf(computerChoice)) {
         console.log(`${playerChoice} VS ${computerChoice}. You win !!!!`);
         return ('win');
-        
+
     } else {
         console.log(`${playerChoice} VS ${computerChoice}. You lose !`);
         return ('lose');
@@ -54,7 +54,7 @@ function game(){
     // Play 5 rounds
     for(let round = 0; round < 5; round++){
 
-        const playerChoice = playerSelection();
+        const playerChoice = playerPlay();
         const computerChoice = computerPlay();
         const result = compareHands(playerChoice, computerChoice);
 
