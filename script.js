@@ -1,9 +1,12 @@
 // Rock Paper Scissors game
 
-// The 2 arrays are different in order to use index as victory condition
-// paper beats rock, so playerHand[0] beats computerHand[0] etc...
-const playerHand = ['paper', 'scissors', 'rock'];
-const computerHand = ['rock', 'paper', 'scissors'];
+// globals
+let playerScore = 0;
+let computerScore = 0;
+let roundCount = 0;
+const playerHand = ['paper', 'scissors', 'rock']; 
+const computerHand = ['rock', 'paper', 'scissors']; // See compareHands
+
 
 function computerPlay() {
 
@@ -13,47 +16,63 @@ function computerPlay() {
     return randomChoice;
 }
 
-
 function compareHands(playerChoice, computerChoice) {
-    //  The string is checked for draw. The index is used to check victory
+
+    // Display hands
+    const handsDisplay = document.getElementById('hands');
+    handsDisplay.textContent = `${playerChoice} vs ${computerChoice}.`
+
+    // The string is checked for draw. The index is used to check victory
+    // At equal index, player wins
     if (playerChoice == computerChoice) {
         return ("It's a draw");
 
     } else if (playerHand.indexOf(playerChoice) == computerHand.indexOf(computerChoice)) {
+        playerScore += 1;
         return ("You win !!!");
 
     } else {
+        computerScore += 1;
         return ("You lose.");
     }
 }
 
-// Main Loop
 function playRound(){
 
-    // Get player choice from button click
-    const playerChoice = this.textContent.toLowerCase();
-    const computerChoice = computerPlay();
+    // 5 rounds limit
+    if (roundCount < 5) {
 
-    const result = `${playerChoice} VS ${computerChoice}. ${compareHands(playerChoice, computerChoice)}`;
-    displayResult(result);
+        // Get player choice from button click
+        const playerChoice = this.textContent.toLowerCase();
+        const computerChoice = computerPlay();
+
+        const result = `${compareHands(playerChoice, computerChoice)}`;
+        displayResult(result);
+        displayScore();
+
+        roundCount++;
+    }
 }
 
 function displayResult(result) {
 
     const resultDisplay = document.getElementById('result');
+    resultDisplay.setAttribute('style', 'padding: 8px; font-size: 28px');
     resultDisplay.textContent = `${result}`;
-;
 }
 
-function game() {
-    const buttons = document.querySelectorAll('button');
-    
-    buttons.forEach((button) => {
-        button.addEventListener('click', playRound);
-    });
-};
+function displayScore() {
 
-game();
+    const scoreDisplay = document.getElementById('score');
+    scoreDisplay.textContent = `Your score: ${playerScore} - computer: ${computerScore}`;
+}
+
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {
+    button.addEventListener('click', playRound);
+});
 
 
 /* 
