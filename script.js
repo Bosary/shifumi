@@ -5,21 +5,6 @@
 const playerHand = ['paper', 'scissors', 'rock'];
 const computerHand = ['rock', 'paper', 'scissors'];
 
-
-function playerPlay() {
-    // Ask user input
-    const selection = prompt("Make your choice ! (write 'rock', 'paper' or 'scissors'): ").toLowerCase();
-    
-    // Check if user input is correct
-    if (playerHand.includes(selection)) {
-        return selection;
-    } else {
-        console.log("Wrong input. Watch out for typos");
-        playerSelection();
-    }
-}
-
-
 function computerPlay() {
 
     // Random pick
@@ -46,12 +31,31 @@ function compareHands(playerChoice, computerChoice) {
 }
 
 // Main Loop
-function game(){
+function playRound(){
+
+    // Get player choice from button click
+    const playerChoice = this.textContent.toLowerCase();
+    const computerChoice = computerPlay();
+
+    compareHands(playerChoice, computerChoice);
+}
+
+function game() {
+    const buttons = document.querySelectorAll('button');
+    
+    buttons.forEach((button) => {
+        button.addEventListener('click', playRound);
+    });
+};
+
+game();
+
+
+/* 
 
     let playerScore = 0;
     let computerScore = 0;
-
-    // Play 5 rounds
+// Play 5 rounds
     for(let round = 0; round < 5; round++){
 
         const playerChoice = playerPlay();
@@ -74,6 +78,4 @@ function game(){
     } else {
         console.log('Better luck next time!');
     }
-}
-
-game();
+*/
