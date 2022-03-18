@@ -17,16 +17,13 @@ function computerPlay() {
 function compareHands(playerChoice, computerChoice) {
     //  The string is checked for draw. The index is used to check victory
     if (playerChoice == computerChoice) {
-        console.log(`${playerChoice} VS ${computerChoice}. It's a draw`);
-        return ('draw');
+        return ("It's a draw");
 
     } else if (playerHand.indexOf(playerChoice) == computerHand.indexOf(computerChoice)) {
-        console.log(`${playerChoice} VS ${computerChoice}. You win !!!!`);
-        return ('win');
+        return ("You win !!!");
 
     } else {
-        console.log(`${playerChoice} VS ${computerChoice}. You lose !`);
-        return ('lose');
+        return ("You lose.");
     }
 }
 
@@ -37,7 +34,15 @@ function playRound(){
     const playerChoice = this.textContent.toLowerCase();
     const computerChoice = computerPlay();
 
-    compareHands(playerChoice, computerChoice);
+    const result = `${playerChoice} VS ${computerChoice}. ${compareHands(playerChoice, computerChoice)}`;
+    displayResult(result);
+}
+
+function displayResult(result) {
+
+    const resultDisplay = document.getElementById('result');
+    resultDisplay.textContent = `${result}`;
+;
 }
 
 function game() {
