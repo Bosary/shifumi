@@ -20,6 +20,7 @@ function compareHands(playerChoice, computerChoice) {
 
     // Display hands
     const handsDisplay = document.getElementById('hands');
+    handsDisplay.setAttribute('style', 'font-size: 20px');
     handsDisplay.textContent = `${playerChoice} vs ${computerChoice}.`
 
     // The string is checked for draw. The index is used to check victory
@@ -52,6 +53,10 @@ function playRound(){
 
         roundCount++;
     }
+
+    if (roundCount == 5) {
+        displayFinalScore();
+    }
 }
 
 function displayResult(result) {
@@ -67,6 +72,21 @@ function displayScore() {
     scoreDisplay.textContent = `Your score: ${playerScore} - computer: ${computerScore}`;
 }
 
+function displayFinalScore() {
+
+    const finalScore = document.getElementById('finalScore');
+
+    if (playerScore == computerScore) {
+        finalScore.setAttribute('style', 'font-size: 36px');
+        finalScore.textContent = "It's a draw";
+    } else if (playerScore > computerScore) {
+        finalScore.setAttribute('style', 'font-size: 36px; color: blue');
+        finalScore.textContent = "You win!!!";
+    } else {
+        finalScore.setAttribute('style', 'font-size: 36px; color: red');
+        finalScore.textContent = "You lose";
+    }
+}
 
 const buttons = document.querySelectorAll('button');
 
